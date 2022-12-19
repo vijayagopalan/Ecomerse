@@ -1,0 +1,13 @@
+header{
+  background-color: #404040;
+  padding: 1%;
+}
+
+header a{
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+body{
+  margin: 0;
+}
