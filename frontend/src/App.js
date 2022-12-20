@@ -1,14 +1,21 @@
 import React from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import './App.css';
+import Home from './Home';
 import data from './data';
+
 
 function App() {
   return (
+    <BrowserRouter>
     <div>
       <header >
         <a href='/'>Amazon</a>
       </header>
       <main>
+        <Routes>
+          <Route path='/' excat element={<Home/>}/>
+        </Routes>
         <h1>Featured Products</h1>
         <div className="products">
           {
@@ -30,6 +37,7 @@ function App() {
         </div>
       </main>
     </div>
+    </BrowserRouter>
   );
 }
 
