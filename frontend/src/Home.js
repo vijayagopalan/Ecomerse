@@ -1,7 +1,8 @@
 import React, { useEffect, useReducer } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Row } from 'react-bootstrap';
 import reducer from './reducer';
+import Product from './ProductComponent';
 
 const Home = () => {
   const [state, dispatch] = useReducer(reducer, {
@@ -32,20 +33,14 @@ const Home = () => {
           state.loading ?
             <div>loading</div> :
             state.error ? <div>{state.error}</div> :
-              state.products.map(product => (
-                <div className="product" key={product.slug}>
-                  <Link to={`/product/${product.slug}`}>
-                    <img src={product.image} alt={product.name} />
-                  </Link>
-                  <div className="product-info">
-                    <Link to={`/product/${product.slug}`}>
-                      <p>{product.name}</p>
-                    </Link>
-                    <p><b>${product.price}</b></p>
-                    <button>Add to cart</button>
-                  </div>
-                </div>
-              ))
+              <Row >
+                {
+                  state.products.map(product => (
+                    <Product key={product.slug} product={product}></Product>
+                  ))
+                }
+              </Row>
+
         }
       </div>
     </div>
