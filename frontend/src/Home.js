@@ -4,13 +4,11 @@ import axios from 'axios';
 import reducer from './reducer';
 
 const Home = () => {
-  // eslint-disable-next-line no-unused-vars
   const [state, dispatch] = useReducer(reducer, {
     products: [],
     loading: false,
     error: ''
   });
-  // const [products, setProducts] = useState([]);
   const fetchData = async () => {
     dispatch({ type: 'FETCH_REQUEST' });
     try {
