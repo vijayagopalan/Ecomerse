@@ -37,3 +37,7 @@ body {
   align-items: center;
   color: #fbce07;
 }
+.img-large
+{
+  max-width: 80%;
+}

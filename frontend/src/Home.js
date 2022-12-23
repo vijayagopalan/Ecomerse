@@ -1,11 +1,11 @@
 import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { Row } from 'react-bootstrap';
-import reducer from './reducer';
+import { productsReducer } from './reducer';
 import Product from './ProductComponent';
 
 const Home = () => {
-  const [state, dispatch] = useReducer(reducer, {
+  const [state, dispatch] = useReducer(productsReducer, {
     products: [],
     loading: false,
     error: ''
