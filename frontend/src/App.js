@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
     <div>
       <header >
-        <Link href='/'>Amazon</Link>
+        <Link to={'/'}>Amazon</Link>
       </header>
       <main>
         <Routes>
