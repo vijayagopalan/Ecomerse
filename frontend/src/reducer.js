@@ -15,3 +15,10 @@ export const productReducer = (state, action) => {
     default: return state;
   }
 }
+
+export const cartReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_TO_CART": return { ...state, cart: { ...state.cart, cartItems: [...state.cart.cartItems, action.payload] } };
+    default: return state;
+  }
+}
