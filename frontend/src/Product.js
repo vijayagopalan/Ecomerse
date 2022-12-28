@@ -1,7 +1,8 @@
 import axios from 'axios';
-import React, { useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer } from 'react';
 import { Badge, Button, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { CartContext } from './Context/CartContext';
 import Rating from './RatingComponent';
 import { productReducer } from './reducer';
 
@@ -12,6 +13,7 @@ const Product = () => {
         loading: false,
         error: ''
     });
+    const cartContextValue = useContext(CartContext);
     const fetchData = async () => {
         dispatch({ type: 'FETCH_REQUEST' });
         try {
@@ -25,9 +27,13 @@ const Product = () => {
     useEffect(() => {
         fetchData();
     }, [slug]);
+
+    const addToCart = () => {
+        cartContextValue.dispatch({type:"ADD_TO_CART",payload:{...state.product,quantity:1}})
+    }
     return (
         <Container className='p-2'>
-            {state.loading ? <div></div> :
+            {state.loading ? <div>loading...</div> :
                 state.error ? <div></div> :
                     <div>
                         <Row>
@@ -49,7 +55,7 @@ const Product = () => {
                                         <h5>Price   :  ${state.product.price}</h5>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
-                                        <h7>Description   :  ${state.product.description}</h7>
+                                        <h5>Description   :  ${state.product.description}</h5>
                                     </ListGroup.Item>
                                 </ListGroup>
 
@@ -72,7 +78,7 @@ const Product = () => {
                                             </ListGroup.Item>
                                             <ListGroup.Item>
                                                 <Row >
-                                                    <Col className='d-flex justify-content-center'>{state.product.countInStock > 0 && <Button variant='primary'>Add to Cart</Button>  }</Col>
+                                                    <Col className='d-flex justify-content-center'>{state.product.countInStock > 0 && <Button onClick={addToCart} variant='primary'>Add to Cart</Button>}</Col>
                                                 </Row>
                                             </ListGroup.Item>
                                         </ListGroup>

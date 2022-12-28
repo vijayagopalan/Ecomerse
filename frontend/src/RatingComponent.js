@@ -8,13 +8,13 @@ const Rating = ({ rating, numReviews }) => {
         let i = 1;
         while (i <= 5) {
             if (i <= rate) {
-                ratingOutput.push(fullStar);
+                ratingOutput.push(fullStar(i));
             }
             else if (i == Math.round(rate)) {
-                ratingOutput.push(halfStar);
+                ratingOutput.push(halfStar(i));
             }
             else {
-                ratingOutput.push(Star);
+                ratingOutput.push(Star(i));
             }
             i++;
         }
