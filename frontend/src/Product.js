@@ -29,8 +29,11 @@ const Product = () => {
     }, [slug]);
 
     const addToCart = () => {
+        const existingItem = cartContextValue.state.cart.cartItems.find(item=>item._id = state.product._id);
+        console.log(existingItem);
         cartContextValue.dispatch({type:"ADD_TO_CART",payload:{...state.product,quantity:1}})
     }
+    console.log(cartContextValue);
     return (
         <Container className='p-2'>
             {state.loading ? <div>loading...</div> :

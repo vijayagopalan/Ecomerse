@@ -8,8 +8,9 @@ import { CartContext } from './Context/CartContext';
 const Product = ({ product }) => {
     const cartContextValue = useContext(CartContext)
     const addToCart = () => {
-        cartContextValue.dispatch({type:"ADD_TO_CART",payload:{...product,quantity:1}})
+        cartContextValue.dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity: 1 } })
     }
+    console.log(cartContextValue);
 
     return (
         <Col sm={6} md={4} lg={3} className="mb-3" >
