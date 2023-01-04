@@ -28,10 +28,15 @@ const Product = () => {
         fetchData();
     }, [slug]);
 
-    const addToCart = () => {
-        const existingItem = cartContextValue.state.cart.cartItems.find(item=>item._id = state.product._id);
-        console.log(existingItem);
-        cartContextValue.dispatch({type:"ADD_TO_CART",payload:{...state.product,quantity:1}})
+    const addToCart = async () => {
+        const existingItem = cartContextValue.state.cart.cartItems.find(item => item._id = state.product._id);
+        const quantity = existingItem ? existingItem.quantity + 1 : 1;
+        const data = await axios.get(`/api/products/${state.product._id}`);
+        if (data.countInStock < quantity) {
+            window.alert("Sorry, Product is Out of Stock");
+            return;
+        }
+        cartContextValue.dispatch({ type: "ADD_TO_CART", payload: { ...state.product, quantity: quantity } });
     }
     console.log(cartContextValue);
     return (

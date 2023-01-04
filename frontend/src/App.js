@@ -26,7 +26,7 @@ function App() {
                   Cart
                   {
                     cartContextValue.state.cart.cartItems.length > 0 &&
-                    <Badge pill bg='danger'>{cartContextValue.state.cart.cartItems.length}</Badge>
+                    <Badge pill bg='danger'>{cartContextValue.state.cart.cartItems.reduce((a,c)=>a+c.quantity,0)}</Badge>
                   }
                 </Link>
               </Nav>

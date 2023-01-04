@@ -4,13 +4,20 @@ import { Col, Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Rating from './RatingComponent';
 import { CartContext } from './Context/CartContext';
+import axios from 'axios';
 
 const Product = ({ product }) => {
     const cartContextValue = useContext(CartContext)
-    const addToCart = () => {
-        cartContextValue.dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity: 1 } })
+    const addToCart = async () => {
+        const existingItem = cartContextValue.state.cart.cartItems.find(item => item._id = cartContextValue.state.product._id);
+        const quantity = existingItem ? existingItem.quantity + 1 : 1;
+        const data = await axios.get(`/api/products/${cartContextValue.state.product._id}`);
+        if (data.countInStock < quantity) {
+            window.alert("Sorry, Product is Out of Stock");
+            return;
+        }
+        cartContextValue.dispatch({ type: "ADD_TO_CART", payload: { ...cartContextValue.state.product, quantity: quantity } });
     }
-    console.log(cartContextValue);
 
     return (
         <Col sm={6} md={4} lg={3} className="mb-3" >
