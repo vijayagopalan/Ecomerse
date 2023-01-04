@@ -8,15 +8,15 @@ import axios from 'axios';
 
 const Product = ({ product }) => {
     const cartContextValue = useContext(CartContext)
-    const addToCart = async () => {
-        const existingItem = cartContextValue.state.cart.cartItems.find(item => item._id = cartContextValue.state.product._id);
+    const addToCart = async (productItem) => {
+        const existingItem = cartContextValue.state.cart.cartItems.find(item => item._id == productItem._id);
         const quantity = existingItem ? existingItem.quantity + 1 : 1;
-        const data = await axios.get(`/api/products/${cartContextValue.state.product._id}`);
+        const data = await axios.get(`/api/products/${productItem._id}`);
         if (data.countInStock < quantity) {
             window.alert("Sorry, Product is Out of Stock");
             return;
         }
-        cartContextValue.dispatch({ type: "ADD_TO_CART", payload: { ...cartContextValue.state.product, quantity: quantity } });
+        cartContextValue.dispatch({ type: "ADD_TO_CART", payload: { ...productItem, quantity: quantity } });
     }
 
     return (
@@ -31,7 +31,7 @@ const Product = ({ product }) => {
                     </Link>
                     <Rating rating={product.rating} numReviews={product.numReviews}></Rating>
                     <Card.Text><b>${product.price}</b></Card.Text>
-                    <Button onClick={addToCart}>Add to cart</Button >
+                    <Button onClick={()=>addToCart(product)}>Add to cart</Button >
                 </Card.Body>
             </Card>
         </Col>

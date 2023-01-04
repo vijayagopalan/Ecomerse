@@ -24,6 +24,10 @@ export const cartReducer = (state, action) => {
       const cartItems = existingItem ? state.cart.cartItems.map((item) => item._id === existingItem._id ? newItem : item) : [...state.cart.cartItems, newItem];
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case "REMOVE_FROM_CART": {
+      const cartItems = state.cart.cartItems.filter((item) => item._id !== action.payload._id);
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
     default: { return state }
   }
 }

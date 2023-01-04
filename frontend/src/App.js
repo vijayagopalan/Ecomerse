@@ -5,9 +5,10 @@ import Home from './Home';
 import PageNotFound from './PageNotFound';
 import Product from './Product';
 import { Navbar, Container, Nav, Badge } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { CartContext } from './Context/CartContext';
+import CartScreen from './CartScreen';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Container>
             <Routes>
               <Route path='/' excat element={<Home />} />
+              <Route path='/cart' element={<CartScreen />} />
               <Route path='/product/:slug' element={<Product />} />
               <Route path='*' element={<PageNotFound />} />
             </Routes>

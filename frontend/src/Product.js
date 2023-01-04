@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Badge, Button, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import { CartContext } from './Context/CartContext';
 import Rating from './RatingComponent';
 import { productReducer } from './reducer';
 
 const Product = () => {
+    const Navigate = useNavigate();
     const { slug } = useParams();
     const [state, dispatch] = useReducer(productReducer, {
         product: [],
@@ -29,7 +30,7 @@ const Product = () => {
     }, [slug]);
 
     const addToCart = async () => {
-        const existingItem = cartContextValue.state.cart.cartItems.find(item => item._id = state.product._id);
+        const existingItem = cartContextValue.state.cart.cartItems.find(item => item._id == state.product._id);
         const quantity = existingItem ? existingItem.quantity + 1 : 1;
         const data = await axios.get(`/api/products/${state.product._id}`);
         if (data.countInStock < quantity) {
@@ -37,6 +38,7 @@ const Product = () => {
             return;
         }
         cartContextValue.dispatch({ type: "ADD_TO_CART", payload: { ...state.product, quantity: quantity } });
+        Navigate('/cart');
     }
     console.log(cartContextValue);
     return (
