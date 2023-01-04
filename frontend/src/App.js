@@ -9,6 +9,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { CartContext } from './Context/CartContext';
 import CartScreen from './CartScreen';
+import SigninScreen from './SigninScreen';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
             <Routes>
               <Route path='/' excat element={<Home />} />
               <Route path='/cart' element={<CartScreen />} />
+              <Route path='/signin' element={<SigninScreen />} />
               <Route path='/product/:slug' element={<Product />} />
               <Route path='*' element={<PageNotFound />} />
             </Routes>
